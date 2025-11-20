@@ -507,3 +507,109 @@ footer {
         width: 100px;
     }
 }
+
+/* --- New Professional Animations --- */
+
+/* Staggered Reveal Base State */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typing Effect */
+.typing-container {
+    display: inline-block;
+    position: relative;
+}
+
+.typing-text {
+    overflow: hidden;
+    border-right: 3px solid var(--accent);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation:
+        typing 3.5s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+    max-width: 0;
+    /* Start hidden */
+    animation-fill-mode: forwards;
+    /* Stay visible after typing */
+}
+
+@keyframes typing {
+    from {
+        max-width: 0
+    }
+
+    to {
+        max-width: 100%
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--accent)
+    }
+}
+
+/* Enhanced Hover Effects */
+.skill-card {
+    /* Existing styles preserved, adding specific hover enhancements */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+    border-color: var(--accent);
+}
+
+.contact-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.contact-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--accent);
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+.contact-btn:hover {
+    color: var(--bg-primary);
+}
+
+.contact-btn:hover::before {
+    width: 100%;
+}
+
+/* Navbar Scroll State */
+.navbar.scrolled {
+    background-color: rgba(10, 25, 47, 0.95);
+    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.9);
+    padding-top: 0;
+    /* Optional: shrink navbar if it had padding */
+    height: 70px;
+    /* Slightly smaller */
+    transition: all 0.3s ease;
+}

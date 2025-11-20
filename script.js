@@ -9,38 +9,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Scroll Animation (Intersection Observer)
+    // Navbar Scroll Effect
+    const navbar = document.querySelector('.navbar');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        lastScrollTop = scrollTop;
+    });
+
+    // Staggered Reveal Animation
     const observerOptions = {
-        threshold: 0.1
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                observer.unobserve(entry.target); // Only animate once
             }
         });
     }, observerOptions);
 
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.classList.add('fade-in-section'); // Add initial class
-        observer.observe(section);
+    // Target elements for staggered reveal
+    const revealElements = document.querySelectorAll('.skill-card, .timeline-item, .edu-card, .section-title');
+
+    revealElements.forEach((el) => {
+        el.classList.add('reveal-item');
+        observer.observe(el);
     });
 
-    // Add CSS for fade-in via JS to ensure it only happens when JS is loaded
-    const style = document.createElement('style');
-    style.innerHTML = `
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    // Add staggered delays to grid items
+    const grids = document.querySelectorAll('.skills-grid, .edu-grid, .timeline');
+    grids.forEach(grid => {
+        const children = grid.querySelectorAll('.reveal-item');
+        children.forEach((child, index) => {
+            child.style.transitionDelay = `${index * 100}ms`;
+        });
+    });
+
+    // Keep section fade-in for general sections if they don't have specific reveal items
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        // Check if section has reveal items, if so, don't fade the whole section to avoid double animation
+        if (section.querySelectorAll('.reveal-item').length === 0) {
+            section.classList.add('reveal-item');
+            observer.observe(section);
         }
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    `;
-    document.head.appendChild(style);
+    });
 });
