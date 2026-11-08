@@ -354,6 +354,112 @@ ul {
     color: var(--white);
 }
 
+/* Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background-color: var(--bg-secondary);
+    padding: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(136, 146, 176, 0.12);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px -15px rgba(2, 12, 27, 0.7);
+}
+
+.project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.project-label {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.project-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.project-links a {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    transition: var(--transition);
+}
+
+.project-links a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.project-title {
+    font-size: 1.35rem;
+    color: var(--white);
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.project-title a {
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.project-title a:hover {
+    color: var(--accent);
+}
+
+.project-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+    flex-grow: 1;
+}
+
+.project-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-tech-list li {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-family: monospace;
+    background-color: var(--accent-tint);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(100, 255, 218, 0.15);
+    transition: var(--transition);
+}
+
+.project-tech-list li:hover {
+    background-color: rgba(100, 255, 218, 0.2);
+    transform: translateY(-2px);
+}
+
 /* Education */
 .edu-grid {
     display: grid;

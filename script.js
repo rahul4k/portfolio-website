@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     // Target elements for staggered reveal
-    const revealElements = document.querySelectorAll('.skill-card, .timeline-item, .edu-card, .section-title');
+    const revealElements = document.querySelectorAll('.skill-card, .timeline-item, .edu-card, .project-card, .section-title');
 
     revealElements.forEach((el) => {
         el.classList.add('reveal-item');
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add staggered delays to grid items
-    const grids = document.querySelectorAll('.skills-grid, .edu-grid, .timeline');
+    const grids = document.querySelectorAll('.skills-grid, .edu-grid, .timeline, .projects-grid');
     grids.forEach(grid => {
         const children = grid.querySelectorAll('.reveal-item');
         children.forEach((child, index) => {
