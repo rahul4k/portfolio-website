@@ -1,0 +1,20 @@
+# Python virtual environments & packages
+venv/
+.venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+
+# Local scripts & temp files
+.gradio/
+test.py
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

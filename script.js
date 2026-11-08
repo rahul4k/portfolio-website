@@ -66,4 +66,49 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(section);
         }
     });
+
+    // --- Theme Toggle Functionality ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    const updateThemeUI = (isLight) => {
+        if (isLight) {
+            document.documentElement.classList.add('light-theme');
+            document.body.classList.add('light-theme');
+            if (themeToggleBtn) {
+                themeToggleBtn.setAttribute('title', 'Switch to dark theme');
+                themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
+            }
+        } else {
+            document.documentElement.classList.remove('light-theme');
+            document.body.classList.remove('light-theme');
+            if (themeToggleBtn) {
+                themeToggleBtn.setAttribute('title', 'Switch to light theme');
+                themeToggleBtn.setAttribute('aria-label', 'Switch to light theme');
+            }
+        }
+    };
+
+    // Determine initial state
+    const savedTheme = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const initialIsLight = savedTheme ? savedTheme === 'light' : prefersLight;
+    updateThemeUI(initialIsLight);
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isCurrentlyLight = document.body.classList.contains('light-theme');
+            const nextIsLight = !isCurrentlyLight;
+            updateThemeUI(nextIsLight);
+            localStorage.setItem('theme', nextIsLight ? 'light' : 'dark');
+        });
+    }
+
+    // Listen for OS theme changes if user hasn't manually selected one
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                updateThemeUI(e.matches);
+            }
+        });
+    }
 });
